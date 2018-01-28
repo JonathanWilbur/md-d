@@ -1,0 +1,761 @@
+[
+ {
+  "name" : "md.interfaces",
+  "kind" : "module",
+  "file" : ".\\source\\md\\interfaces.d",
+  "members" : [
+   {
+    "name" : "std.traits",
+    "kind" : "import",
+    "line" : 2,
+    "char" : 15,
+    "selective" : [
+     "isSomeString"
+    ]
+   },
+   {
+    "name" : "ParsingState",
+    "kind" : "enum",
+    "comment" : "\n",
+    "line" : 10,
+    "char" : 1,
+    "baseDeco" : "i",
+    "members" : [
+     {
+      "name" : "h1",
+      "kind" : "enum member",
+      "value" : "0",
+      "line" : 12,
+      "char" : 5
+     },
+     {
+      "name" : "h2",
+      "kind" : "enum member",
+      "value" : "1",
+      "line" : 13,
+      "char" : 5
+     },
+     {
+      "name" : "h3",
+      "kind" : "enum member",
+      "value" : "2",
+      "line" : 14,
+      "char" : 5
+     },
+     {
+      "name" : "h4",
+      "kind" : "enum member",
+      "value" : "3",
+      "line" : 15,
+      "char" : 5
+     },
+     {
+      "name" : "h5",
+      "kind" : "enum member",
+      "value" : "4",
+      "line" : 16,
+      "char" : 5
+     },
+     {
+      "name" : "h6",
+      "kind" : "enum member",
+      "value" : "5",
+      "line" : 17,
+      "char" : 5
+     },
+     {
+      "name" : "link",
+      "kind" : "enum member",
+      "value" : "6",
+      "line" : 18,
+      "char" : 5
+     },
+     {
+      "name" : "blockquote",
+      "kind" : "enum member",
+      "value" : "7",
+      "line" : 19,
+      "char" : 5
+     },
+     {
+      "name" : "italic1",
+      "kind" : "enum member",
+      "value" : "8",
+      "line" : 20,
+      "char" : 5
+     },
+     {
+      "name" : "italic2",
+      "kind" : "enum member",
+      "value" : "9",
+      "line" : 21,
+      "char" : 5
+     },
+     {
+      "name" : "bold1",
+      "kind" : "enum member",
+      "value" : "10",
+      "line" : 22,
+      "char" : 5
+     },
+     {
+      "name" : "bold2",
+      "kind" : "enum member",
+      "value" : "11",
+      "line" : 23,
+      "char" : 5
+     },
+     {
+      "name" : "strikethrough",
+      "kind" : "enum member",
+      "value" : "12",
+      "line" : 24,
+      "char" : 5
+     },
+     {
+      "name" : "orderedList",
+      "kind" : "enum member",
+      "value" : "13",
+      "line" : 25,
+      "char" : 5
+     },
+     {
+      "name" : "unorderedList",
+      "kind" : "enum member",
+      "value" : "14",
+      "line" : 26,
+      "char" : 5
+     },
+     {
+      "name" : "taskList",
+      "kind" : "enum member",
+      "value" : "15",
+      "line" : 27,
+      "char" : 5
+     },
+     {
+      "name" : "inlineCode",
+      "kind" : "enum member",
+      "value" : "16",
+      "line" : 28,
+      "char" : 5
+     },
+     {
+      "name" : "codeBlock",
+      "kind" : "enum member",
+      "value" : "17",
+      "line" : 29,
+      "char" : 5
+     },
+     {
+      "name" : "emoji",
+      "kind" : "enum member",
+      "value" : "18",
+      "line" : 30,
+      "char" : 5
+     },
+     {
+      "name" : "username",
+      "kind" : "enum member",
+      "value" : "19",
+      "line" : 31,
+      "char" : 5
+     },
+     {
+      "name" : "tableHeader",
+      "kind" : "enum member",
+      "value" : "20",
+      "line" : 32,
+      "char" : 5
+     },
+     {
+      "name" : "tableRow",
+      "kind" : "enum member",
+      "value" : "21",
+      "line" : 33,
+      "char" : 5
+     },
+     {
+      "name" : "image",
+      "kind" : "enum member",
+      "value" : "22",
+      "line" : 34,
+      "char" : 5
+     }
+    ]
+   },
+   {
+    "name" : "MarkdownParser",
+    "kind" : "class",
+    "comment" : "\n",
+    "line" : 39,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "maximumMarkdownSizeInBytes",
+      "kind" : "variable",
+      "line" : 41,
+      "char" : 22,
+      "storageClass" : [
+       "immutable"
+      ],
+      "deco" : "yk",
+      "originalType" : "size_t",
+      "init" : "500000u",
+      "offset" : 8
+     },
+     {
+      "name" : "orderedListNumbers",
+      "kind" : "variable",
+      "protection" : "protected",
+      "line" : 42,
+      "char" : 31,
+      "storageClass" : [
+       "static"
+      ],
+      "deco" : "Ak",
+      "originalType" : "size_t[]"
+     },
+     {
+      "name" : "headerLevel",
+      "kind" : "variable",
+      "protection" : "protected",
+      "line" : 43,
+      "char" : 28,
+      "storageClass" : [
+       "static"
+      ],
+      "deco" : "h",
+      "init" : "cast(ubyte)0u"
+     },
+     {
+      "name" : "stateStack",
+      "kind" : "variable",
+      "protection" : "private",
+      "line" : 44,
+      "char" : 28,
+      "deco" : "AE2md10interfaces12ParsingState",
+      "offset" : 12
+     }
+    ]
+   },
+   {
+    "name" : "ANSITerminalPrintable",
+    "kind" : "alias",
+    "comment" : "\n",
+    "line" : 53,
+    "char" : 8,
+    "deco" : "C2md10interfaces51AmericanNationalStandardsInstituteTerminalPrintable"
+   },
+   {
+    "name" : "AmericanNationalStandardsInstituteTerminalPrintable",
+    "kind" : "interface",
+    "comment" : "\n",
+    "line" : 56,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "toANSITerminalOutput",
+      "kind" : "alias",
+      "comment" : "\n",
+      "line" : 59,
+      "char" : 12
+     },
+     {
+      "kind" : "template",
+      "comment" : "\n",
+      "line" : 62,
+      "char" : 12,
+      "name" : "toAmericanNationalStandardsInstituteTerminalOutput",
+      "parameters" : [
+       {
+        "name" : "T",
+        "kind" : "type"
+       }
+      ],
+      "constraint" : "isSomeString!T",
+      "members" : [
+       {
+        "name" : "toAmericanNationalStandardsInstituteTerminalOutput",
+        "kind" : "function",
+        "line" : 62,
+        "char" : 12,
+        "type" : "string(T markdown)",
+        "parameters" : [
+         {
+          "name" : "markdown",
+          "type" : "T"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name" : "HTMLable",
+    "kind" : "alias",
+    "comment" : "\n",
+    "line" : 67,
+    "char" : 8,
+    "deco" : "C2md10interfaces27HyperTextMarkupLanguageable"
+   },
+   {
+    "name" : "HyperTextMarkupLanguageable",
+    "kind" : "interface",
+    "comment" : "\n",
+    "line" : 70,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "toHTML",
+      "kind" : "alias",
+      "comment" : "\n",
+      "line" : 73,
+      "char" : 12
+     },
+     {
+      "kind" : "template",
+      "comment" : "\n",
+      "line" : 76,
+      "char" : 12,
+      "name" : "toHyperTextMarkupLanguage",
+      "parameters" : [
+       {
+        "name" : "T",
+        "kind" : "type"
+       }
+      ],
+      "constraint" : "isSomeString!T",
+      "members" : [
+       {
+        "name" : "toHyperTextMarkupLanguage",
+        "kind" : "function",
+        "line" : 76,
+        "char" : 12,
+        "type" : "string(T markdown)",
+        "parameters" : [
+         {
+          "name" : "markdown",
+          "type" : "T"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name" : "md.terminals.ansi",
+  "kind" : "module",
+  "file" : ".\\source\\md\\terminals\\ansi.d",
+  "comment" : "    A class representing an ANSI Terminal, which includes the ANSI control characters.\n\n    Windows cmd.exe does not support:\n    $(UL\n        $(LI strikethrough)\n        $(LI bold)\n        $(LI italic)\n    )\n",
+  "members" : [
+   {
+    "name" : "ANSITerminal",
+    "kind" : "alias",
+    "comment" : "\n",
+    "line" : 14,
+    "char" : 8,
+    "deco" : "C2md9terminals4ansi42AmericanNationalStandardsInstituteTerminal"
+   },
+   {
+    "name" : "AmericanNationalStandardsInstituteTerminal",
+    "kind" : "class",
+    "comment" : "\n",
+    "line" : 17,
+    "char" : 1,
+    "members" : [
+     {
+      "name" : "escapes",
+      "kind" : "enum",
+      "line" : 20,
+      "char" : 5,
+      "baseDeco" : "Aya",
+      "members" : [
+       {
+        "name" : "reset",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[0m\"",
+        "line" : 22,
+        "char" : 9
+       },
+       {
+        "name" : "bold",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[1m\"",
+        "line" : 23,
+        "char" : 9
+       },
+       {
+        "name" : "faint",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[90m\"",
+        "line" : 24,
+        "char" : 9
+       },
+       {
+        "name" : "italic",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[3m\"",
+        "line" : 25,
+        "char" : 9
+       },
+       {
+        "name" : "underline",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[4m\"",
+        "line" : 26,
+        "char" : 9
+       },
+       {
+        "name" : "negative",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[7m\"",
+        "line" : 27,
+        "char" : 9
+       },
+       {
+        "name" : "strikethrough",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[9m\"",
+        "line" : 28,
+        "char" : 9
+       },
+       {
+        "name" : "normal",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[22m\"",
+        "line" : 29,
+        "char" : 9
+       },
+       {
+        "name" : "blackText",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[30m\"",
+        "line" : 30,
+        "char" : 9
+       },
+       {
+        "name" : "redText",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[91m\"",
+        "line" : 31,
+        "char" : 9
+       },
+       {
+        "name" : "greenText",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[32m\"",
+        "line" : 32,
+        "char" : 9
+       },
+       {
+        "name" : "yellowText",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[33m\"",
+        "line" : 33,
+        "char" : 9
+       },
+       {
+        "name" : "blueText",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[34m\"",
+        "line" : 34,
+        "char" : 9
+       },
+       {
+        "name" : "magentaText",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[35m\"",
+        "line" : 35,
+        "char" : 9
+       },
+       {
+        "name" : "cyanText",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[36m\"",
+        "line" : 36,
+        "char" : 9
+       },
+       {
+        "name" : "whiteText",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[97m\"",
+        "line" : 37,
+        "char" : 9
+       },
+       {
+        "name" : "blackBackground",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[40m\"",
+        "line" : 38,
+        "char" : 9
+       },
+       {
+        "name" : "redBackground",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[41m\"",
+        "line" : 39,
+        "char" : 9
+       },
+       {
+        "name" : "greenBackground",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[42m\"",
+        "line" : 40,
+        "char" : 9
+       },
+       {
+        "name" : "yellowBackground",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[43m\"",
+        "line" : 41,
+        "char" : 9
+       },
+       {
+        "name" : "blueBackground",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[44m\"",
+        "line" : 42,
+        "char" : 9
+       },
+       {
+        "name" : "magentaBackground",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[45m\"",
+        "line" : 43,
+        "char" : 9
+       },
+       {
+        "name" : "cyanBackground",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[46m\"",
+        "line" : 44,
+        "char" : 9
+       },
+       {
+        "name" : "whiteBackground",
+        "kind" : "enum member",
+        "value" : "\"\\x1b[107m\"",
+        "line" : 45,
+        "char" : 9
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name" : "md.flavors.common",
+  "kind" : "module",
+  "file" : ".\\source\\md\\flavors\\common.d",
+  "members" : []
+ },
+ {
+  "name" : "md.flavors.github",
+  "kind" : "module",
+  "file" : ".\\source\\md\\flavors\\github.d",
+  "members" : [
+   {
+    "name" : "md.interfaces",
+    "kind" : "import",
+    "line" : 2,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "md.terminals.ansi",
+    "kind" : "import",
+    "line" : 3,
+    "char" : 8,
+    "protection" : "private"
+   },
+   {
+    "name" : "std.array",
+    "kind" : "import",
+    "line" : 4,
+    "char" : 8,
+    "protection" : "private",
+    "selective" : [
+     "replace",
+     "split"
+    ]
+   },
+   {
+    "name" : "std.ascii",
+    "kind" : "import",
+    "line" : 5,
+    "char" : 8,
+    "protection" : "private",
+    "selective" : [
+     "isAlpha",
+     "isAlphaNum",
+     "isDigit",
+     "isWhite"
+    ]
+   },
+   {
+    "name" : "std.conv",
+    "kind" : "import",
+    "line" : 6,
+    "char" : 8,
+    "protection" : "private",
+    "selective" : [
+     "to"
+    ]
+   },
+   {
+    "name" : "std.stdio",
+    "kind" : "import",
+    "line" : 7,
+    "char" : 8,
+    "protection" : "private",
+    "selective" : [
+     "writeln"
+    ]
+   },
+   {
+    "name" : "std.string",
+    "kind" : "import",
+    "line" : 8,
+    "char" : 8,
+    "protection" : "private",
+    "selective" : [
+     "indexOf"
+    ]
+   },
+   {
+    "name" : "GitHubMarkdownParser",
+    "kind" : "class",
+    "comment" : "\n",
+    "line" : 12,
+    "char" : 1,
+    "base" : "md.interfaces.MarkdownParser",
+    "interfaces" : [
+     "md.interfaces.AmericanNationalStandardsInstituteTerminalPrintable"
+    ],
+    "members" : [
+     {
+      "kind" : "template",
+      "comment" : "\n",
+      "line" : 16,
+      "char" : 7,
+      "name" : "toANSITerminalOutput",
+      "parameters" : [
+       {
+        "name" : "T",
+        "kind" : "type"
+       }
+      ],
+      "constraint" : "isSomeString!T",
+      "members" : [
+       {
+        "name" : "toANSITerminalOutput",
+        "kind" : "function",
+        "line" : 16,
+        "char" : 7,
+        "type" : "T(in T markdown)",
+        "parameters" : [
+         {
+          "name" : "markdown",
+          "type" : "T",
+          "storageClass" : [
+           "in"
+          ]
+         }
+        ],
+        "endline" : 42,
+        "endchar" : 5
+       }
+      ]
+     },
+     {
+      "kind" : "template",
+      "protection" : "private",
+      "line" : 45,
+      "char" : 7,
+      "name" : "convertNonCodeBlockMarkdownToANSITerminalOutput",
+      "parameters" : [
+       {
+        "name" : "T",
+        "kind" : "type"
+       }
+      ],
+      "members" : [
+       {
+        "name" : "convertNonCodeBlockMarkdownToANSITerminalOutput",
+        "kind" : "function",
+        "line" : 45,
+        "char" : 7,
+        "type" : "T(in T markdown)",
+        "parameters" : [
+         {
+          "name" : "markdown",
+          "type" : "T",
+          "storageClass" : [
+           "in"
+          ]
+         }
+        ],
+        "endline" : 294,
+        "endchar" : 5
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name" : "startsLineWithOnlyWhiteSpaceUntil",
+    "kind" : "function",
+    "protection" : "private",
+    "line" : 298,
+    "char" : 6,
+    "deco" : "FxAyaiZb",
+    "originalType" : "bool(in string s, int x)",
+    "parameters" : [
+     {
+      "name" : "s",
+      "deco" : "xAya"
+     },
+     {
+      "name" : "x",
+      "deco" : "i"
+     }
+    ],
+    "endline" : 303,
+    "endchar" : 1
+   },
+   {
+    "name" : "leadingSpaces",
+    "kind" : "function",
+    "protection" : "private",
+    "line" : 306,
+    "char" : 5,
+    "deco" : "FxAyaiZi",
+    "originalType" : "int(in string s, int x)",
+    "parameters" : [
+     {
+      "name" : "s",
+      "deco" : "xAya"
+     },
+     {
+      "name" : "x",
+      "deco" : "i"
+     }
+    ],
+    "endline" : 315,
+    "endchar" : 1
+   }
+  ]
+ },
+ {
+  "name" : "md.flavors.stackoverflow",
+  "kind" : "module",
+  "file" : ".\\source\\md\\flavors\\stackoverflow.d",
+  "members" : []
+ }
+]
